@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "LedDisplay.h"
 #include "Relay.h"
+#include "Scheduler.h"
 
 #ifndef PIN_RELAY
 #define PIN_RELAY 12
@@ -19,6 +20,7 @@ Termistr *termistr;
 Button *tempUp;
 Button *tempDown;
 Relay *relay;
+Scheduler* scheduler;
 
 void buttonTempUpClick(BUTTON_CLICK_EVENT event) {
     Serial.print("buttonTempUpClick\n");
@@ -35,7 +37,7 @@ void buttonTempDownClick(BUTTON_CLICK_EVENT event) {
     lcd->setMaxTemperature(t);
 }
 
-void updateTemperature(double newTemperature) {
+void updateTemperature() {
     Serial.print("updateTemperature\n");
     Serial.print(newTemperature);
     Serial.print("\n");
@@ -60,7 +62,11 @@ void setup() {
     lcd = new LedDisplay();
 
     termistr = new Termistr();
-    termistr->addListener(updateTemperature);
+
+    scheduler = new Scheduler();
+
+    Job* job = new Job(1000, updateTemperature);
+    scheduler->addJob(job);
     
     tempDown = new Button(PIN_TEMP_DOWN);
     tempDown->addListener(buttonTempDownClick);
@@ -70,7 +76,7 @@ void setup() {
 }
 
 void loop() {
-    termistr->loop();
+    scheduler->loop();
     tempDown->loop();
     tempUp->loop();
     lcd->loop();

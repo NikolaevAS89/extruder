@@ -3,9 +3,9 @@
 Button::Button(uint8_t pin) {
    this->pin = pin;
    this->listeners = NULL;
-   pinMode(pin, INPUT_PULLUP);
    this->startMs = millis();
    this->state = digitalRead(this->pin);
+   pinMode(pin, INPUT_PULLUP);
 }
 
 Button::~Button() {
