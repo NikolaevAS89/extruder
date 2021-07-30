@@ -2,9 +2,6 @@
 
 Scheduler::Scheduler() {
    this->jobs = NULL;
-   this->startMs = millis();
-   this->state = digitalRead(this->pin);
-   pinMode(pin, INPUT_PULLUP);
 }
 
 Scheduler::~Scheduler() {
@@ -24,7 +21,7 @@ void Scheduler::addJob(Job *job) {
 }
 
 void Scheduler::loop() {
-  Node* p = this->jobs;
+  JobNode* p = this->jobs;
   while(p != NULL) {
     p->job->execute();
     p = p->prev;

@@ -38,6 +38,7 @@ void buttonTempDownClick(BUTTON_CLICK_EVENT event) {
 }
 
 void updateTemperature() {
+    double newTemperature=termistr->getValue();
     Serial.print("updateTemperature\n");
     Serial.print(newTemperature);
     Serial.print("\n");

@@ -1,7 +1,7 @@
 #include "Termistr.h"
 
 
-Termistr::Termistr(uint8_t pin, uint32_t period, double b, double t0) {
+Termistr::Termistr(uint8_t pin, double b, double t0) {
 	this->pin = pin;
   this->b = b;
   this->t0 = t0;
@@ -11,7 +11,7 @@ Termistr::Termistr(uint8_t pin, uint32_t period, double b, double t0) {
 Termistr::~Termistr() {
 }
 
-void Termistr::getValue(uint8_t type) {
+double Termistr::getValue() {
     this->nextTime = this->nextTime + this->period;
     double t = (double) analogRead( this->pin );
     double d2 = THERMISTOR_R * ( 1023.0 - t );

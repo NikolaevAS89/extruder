@@ -7,7 +7,7 @@
 extern bool isDebug;
 
 struct JobNode {
-  Node* prev;
+  JobNode* prev;
   Job *job;
 };
 

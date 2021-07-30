@@ -22,9 +22,9 @@ class Termistr {
     uint32_t period;
     uint32_t nextTime;
   public:
-    Termistr(uint8_t pin=A0, uint32_t period=1000, double b=4092.0, double t0=298.15);
+    Termistr(uint8_t pin=A0, double b=4092.0, double t0=298.15);
     ~Termistr();
-    double getValue(uint8_t type);
+    double getValue();
 };
 
 #endif
